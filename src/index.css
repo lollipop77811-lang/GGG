@@ -116,6 +116,15 @@
   letter-spacing: -0.03em;
 }
 
+/* homepage hero — slightly smaller so the story photos stay visible
+   and the whole hero (incl. caption strip) fits one viewport */
+@utility display-hero {
+  font-weight: 500;
+  font-size: clamp(2.1rem, 5vw, 4.1rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
 @utility display-2 {
   font-weight: 500;
   font-size: clamp(1.9rem, 4.4vw, 3.1rem);

@@ -93,11 +93,11 @@ export default function Hero() {
 
       {/* content */}
       <div
-        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-28 pb-24 md:px-10 md:pt-36 md:pb-28 [text-shadow:0_2px_22px_rgba(9,30,51,0.55)]"
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-20 pb-20 md:px-10 md:pt-28 md:pb-28 [text-shadow:0_2px_22px_rgba(9,30,51,0.55)]"
       >
         <div className="max-w-4xl">
           {/* eyebrow */}
-          <div className="mb-7 inline-flex items-center gap-3 animate-fade-up">
+          <div className="mb-4 inline-flex items-center gap-3 animate-fade-up">
             <span className="h-[7px] w-[7px] rounded-full bg-citron animate-blink" />
             <span className="label-tag text-cream/70">
               overseas recruitment & manpower
@@ -105,7 +105,7 @@ export default function Hero() {
           </div>
 
           {/* giant lowercase editorial headline */}
-          <h1 className="display-1 animate-fade-up text-cream" style={{ animationDelay: "0.1s" }}>
+          <h1 className="display-hero animate-fade-up text-cream" style={{ animationDelay: "0.1s" }}>
             skilled people.
             <br />
             <em className="font-light text-citron not-italic">global opportunities.</em>
@@ -113,7 +113,7 @@ export default function Hero() {
 
           {/* sub copy */}
           <p
-            className="mt-8 max-w-xl text-base leading-relaxed font-light text-cream/75 animate-fade-up md:text-lg"
+            className="mt-5 max-w-xl text-[15px] leading-relaxed font-light text-cream/75 animate-fade-up md:text-lg"
             style={{ animationDelay: "0.2s" }}
           >
             Guru Gorakhnath Global Manpower LLP connects candidates with
@@ -123,12 +123,12 @@ export default function Hero() {
 
           {/* actions */}
           <div
-            className="mt-10 flex flex-wrap items-center gap-4 animate-fade-up"
+            className="mt-6 flex flex-wrap items-center gap-4 animate-fade-up"
             style={{ animationDelay: "0.3s" }}
           >
             <Link
               to="/jobs"
-              className="group inline-flex items-center gap-3 rounded-full bg-citron px-7 py-4 text-sm font-semibold lowercase text-charcoal transition-all duration-300 hover:bg-cream"
+              className="group inline-flex items-center gap-3 rounded-full bg-citron px-7 py-3.5 text-sm font-semibold lowercase text-charcoal transition-all duration-300 hover:bg-cream md:py-4"
             >
               explore jobs
               <ArrowRight
@@ -138,7 +138,7 @@ export default function Hero() {
             </Link>
             <a
               href={`tel:${contact.primary}`}
-              className="inline-flex items-center gap-3 rounded-full border border-cream/30 px-7 py-4 text-sm font-semibold lowercase text-cream transition-all duration-300 hover:border-citron hover:text-citron"
+              className="inline-flex items-center gap-3 rounded-full border border-cream/30 px-7 py-3.5 text-sm font-semibold lowercase text-cream transition-all duration-300 hover:border-citron hover:text-citron md:py-4"
             >
               talk to our team
             </a>
@@ -146,7 +146,7 @@ export default function Hero() {
 
           {/* meta strip */}
           <div
-            className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 animate-fade-up"
+            className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 animate-fade-up"
             style={{ animationDelay: "0.4s" }}
           >
             <span className="inline-flex items-center gap-2 text-[12px] font-medium tracking-wide text-cream/60">
@@ -161,9 +161,9 @@ export default function Hero() {
         </div>
 
         {/* bottom bar: destinations ticker + scroll button */}
-        <div className="mt-10 flex items-end justify-between gap-6 border-t border-cream/15 pt-7 md:mt-16">
+        <div className="mt-6 flex items-end justify-between gap-6 border-t border-cream/15 pt-4 md:mt-10 md:pt-5">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span className="label-tag text-cream/40">recruitment destinations</span>
+            <span className="label-tag hidden text-cream/40 sm:inline">recruitment destinations</span>
             <div className="flex flex-wrap gap-x-5 gap-y-1">
               {countries.slice(0, 6).map((country) => (
                 <Link
@@ -198,7 +198,7 @@ export default function Hero() {
       </div>
 
       {/* slide caption — bottom right corner (right offset clears the floating chat bubble) */}
-      <div className="absolute right-5 bottom-6 z-20 flex flex-col items-end gap-3 md:right-28 md:bottom-8">
+      <div className="absolute right-5 bottom-5 z-20 flex flex-col items-end gap-3 md:right-28 md:bottom-8">
         {/* progress bars (clickable) */}
         <div className="flex items-center gap-1.5">
           {slides.map((slide, i) => (
