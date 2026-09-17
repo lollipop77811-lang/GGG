@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowDown, ShieldCheck, Globe2 } from "lucide-react";
 import { countries, contact } from "../data/siteData";
@@ -31,8 +31,9 @@ const SLIDE_INTERVAL = 6000; /* ms — keep in sync with --animate-slide-progres
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
+  const touch = useRef({ x: 0, y: 0 });
 
-  /* auto slide — restarts whenever the index changes (incl. manual clicks) */
+  /* auto slide — restarts whenever the index changes (incl. manual clicks/swipes) */
   useEffect(() => {
     const t = setTimeout(
       () => setIndex((i) => (i + 1) % slides.length),
@@ -41,8 +42,30 @@ export default function Hero() {
     return () => clearTimeout(t);
   }, [index]);
 
+  /* swipe support — horizontal drag changes slide (mobile) */
+  const onTouchStart = (e) => {
+    touch.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - touch.current.x;
+    const dy = e.changedTouches[0].clientY - touch.current.y;
+    /* horizontal intent only — never hijack vertical page scrolling */
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (dx < 0) setIndex((i) => (i + 1) % slides.length);
+      else setIndex((i) => (i - 1 + slides.length) % slides.length);
+    }
+  };
+
   return (
-    <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy-deep" id="home">
+    <section
+      className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy-deep"
+      id="home"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
       {/* auto-sliding background carousel */}
       <div className="absolute inset-0">
         {slides.map((slide, i) => (
@@ -56,19 +79,22 @@ export default function Hero() {
             <img
               src={slide.src}
               alt=""
-              className={`h-full w-full object-cover object-center opacity-60 transition-transform duration-[7000ms] ease-out ${
+              className={`h-full w-full object-cover object-center transition-transform duration-[7000ms] ease-out ${
                 i === index ? "scale-105" : "scale-100"
               }`}
             />
           </div>
         ))}
-        {/* readability washes */}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/85" />
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-navy-deep/55 via-transparent to-transparent" />
+        {/* localized readability gradients — photo stays the main visual */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-navy-deep/90 via-navy-deep/55 to-navy-deep/20 md:from-navy-deep/85 md:via-navy-deep/35 md:to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 z-[2] h-2/5 bg-gradient-to-t from-navy-deep/90 via-navy-deep/35 to-transparent" />
+        <div className="absolute inset-x-0 top-0 z-[2] h-28 bg-gradient-to-b from-navy-deep/60 to-transparent" />
       </div>
 
       {/* content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-28 pb-24 md:px-10 md:pt-36 md:pb-28">
+      <div
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-28 pb-24 md:px-10 md:pt-36 md:pb-28 [text-shadow:0_2px_22px_rgba(9,30,51,0.55)]"
+      >
         <div className="max-w-4xl">
           {/* eyebrow */}
           <div className="mb-7 inline-flex items-center gap-3 animate-fade-up">
