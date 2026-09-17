@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowDown, ShieldCheck, Globe2 } from "lucide-react";
-import { countries, contact } from "../data/siteData";
+import { contact } from "../data/siteData";
 
 /* hero slide story — in the order provided (1 → 5) */
 const slides = [
@@ -160,29 +160,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* bottom bar: destinations ticker + scroll button */}
-        <div className="mt-6 flex items-end justify-between gap-6 border-t border-cream/15 pt-4 md:mt-10 md:pt-5">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <span className="label-tag hidden text-cream/40 sm:inline">recruitment destinations</span>
-            <div className="flex flex-wrap gap-x-5 gap-y-1">
-              {countries.slice(0, 6).map((country) => (
-                <Link
-                  key={country}
-                  to="/countries"
-                  className="text-[13px] font-light lowercase text-cream/70 transition-colors hover:text-citron"
-                >
-                  {country}
-                </Link>
-              ))}
-              <Link
-                to="/countries"
-                className="text-[13px] font-medium lowercase text-citron underline decoration-citron/40 underline-offset-4 transition-colors hover:decoration-citron"
-              >
-                view all →
-              </Link>
-            </div>
-          </div>
-
+        {/* bottom bar: circular scroll indicator */}
+        <div className="mt-6 flex items-end justify-end border-t border-cream/15 pt-4 md:mt-10 md:pt-5">
           {/* circular scroll indicator — lunchline signature */}
           <button
             type="button"
