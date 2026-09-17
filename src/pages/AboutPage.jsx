@@ -11,7 +11,6 @@ import {
   MessageCircle,
   Briefcase,
   Building2,
-  Sparkles,
   FileCheck2,
 } from "lucide-react";
 import PageBanner from "../components/PageBanner";
@@ -78,303 +77,319 @@ export default function AboutPage() {
     { name: "Romania", code: "romania", region: "Europe", tag: "Construction & MEP" },
   ];
 
+  const stats = [
+    [Globe, "12+", "global nations"],
+    [Briefcase, "45+", "trade categories"],
+    [ShieldCheck, `reg. ${contact.registration}`, "government approved"],
+    [MapPin, "gorakhpur, up", "headquarters & desk"],
+  ];
+
   return (
-    <div className="page-about">
-      {/* Top Banner - hideBreadcrumb=true removes the top Home breadcrumb line per user request */}
+    <div>
       <PageBanner
-        kicker="Official Overseas Recruitment Center • Gorakhpur"
-        title="About Guru Gorakhnath Global Manpower"
+        kicker="official overseas recruitment center • gorakhpur"
+        title="about guru gorakhnath global manpower"
         description="A government-recognized overseas manpower consultancy bridging India's skilled tradesmen and technical workforce with prestigious career opportunities across the Gulf and Europe."
         hideBreadcrumb={true}
       />
 
-      {/* Trust & Stats Metric Bar */}
-      <section className="about-stats-bar">
-        <div className="container about-stats-container">
-          <div className="about-stat-item">
-            <div className="stat-icon-wrap gold">
-              <Globe size={22} />
+      {/* stats strip */}
+      <section className="border-b border-line bg-paper">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-x-10 gap-y-5 px-5 py-8 sm:grid-cols-2 md:px-10 lg:grid-cols-4">
+          {stats.map(([Icon, strong, small], i) => (
+            <div
+              key={small}
+              className={`flex items-center gap-4 ${i > 0 ? "lg:border-l lg:border-line lg:pl-10" : ""}`}
+            >
+              <Icon size={20} strokeWidth={1.6} className="shrink-0 text-citron-deep" />
+              <div className="leading-tight">
+                <strong className="block text-[14px] font-semibold lowercase">{strong}</strong>
+                <span className="mt-0.5 block text-[12px] text-ink-soft">{small}</span>
+              </div>
             </div>
-            <div>
-              <strong className="stat-number">12+</strong>
-              <span className="stat-label">Global Nations</span>
+          ))}
+        </div>
+      </section>
+
+      {/* heritage + polaroid collage */}
+      <section className="bg-paper py-20 md:py-24">
+        <div className="mx-auto grid max-w-[1440px] items-center gap-14 px-5 md:px-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <div>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-10 bg-citron-deep" />
+              <span className="label-tag text-ink-soft">our heritage & mission</span>
             </div>
+            <h2 className="display-2 max-w-xl">
+              from local craftsmanship to{" "}
+              <span className="relative inline-block">
+                flourishing global careers.
+                <span className="absolute inset-x-0 bottom-1 -z-10 h-3 bg-citron/60 md:h-4" />
+              </span>
+            </h2>
+
+            <div className="mt-8 max-w-xl space-y-5">
+              <p className="text-[15px] leading-relaxed text-ink-soft">
+                <strong className="text-charcoal">Guru Gorakhnath Global Manpower LLP</strong>{" "}
+                was established with a singular, unwavering vision: to provide
+                honest, legally safeguarded, and transparent overseas employment
+                opportunities for skilled and hardworking professionals from
+                Uttar Pradesh and across India.
+              </p>
+              <p className="text-[15px] leading-relaxed text-ink-soft">
+                Headquartered at Sonbarsa Bazar, NH 28, Gorakhpur, we serve as
+                an accredited gateway connecting talented masons, electricians,
+                pipe fitters, fabricators, welders, chefs, and facility staff
+                with premier employers in the Gulf (Dubai, Saudi Arabia, Qatar,
+                Kuwait, Oman, Bahrain) and Europe (Romania, Poland, Bulgaria).
+              </p>
+            </div>
+
+            {/* verification checklist */}
+            <div className="mt-10 grid gap-2.5 sm:grid-cols-2">
+              {verificationPoints.map((pt) => (
+                <div
+                  key={pt.title}
+                  className="flex items-start gap-3 rounded-lg border border-line bg-cream p-4 transition-colors hover:border-citron-deep/50"
+                >
+                  <CheckCircle2 size={17} className="mt-0.5 shrink-0 text-citron-deep" />
+                  <div className="leading-snug">
+                    <strong className="block text-[12.5px] font-semibold lowercase">{pt.title}</strong>
+                    <span className="mt-1 block text-[11.5px] text-ink-soft">{pt.subtitle}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* quote */}
+            <blockquote className="mt-10 border-l-4 border-citron bg-cream p-6 md:p-7">
+              <p className="text-[15px] leading-relaxed text-charcoal/85 italic">
+                &ldquo;We hold ourselves to the highest standards of integrity.
+                Every job opening we share is verified, every visa processed is
+                legal, and every candidate is guided like family.&rdquo;
+              </p>
+              <footer className="mt-4">
+                <strong className="text-[13px] font-semibold lowercase">leadership team</strong>
+                <small className="mt-0.5 block text-[11.5px] text-ink-soft">
+                  guru gorakhnath global manpower llp • gorakhpur
+                </small>
+              </footer>
+            </blockquote>
           </div>
 
-          <div className="about-stat-item">
-            <div className="stat-icon-wrap blue">
-              <Briefcase size={22} />
+          {/* polaroid collage */}
+          <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+            <div className="relative rotate-[2deg] rounded-sm bg-cream p-4 pb-14 shadow-[0_24px_60px_-20px_rgba(32,32,30,0.35)] transition-transform duration-500 hover:rotate-0">
+              <span className="absolute -top-3 left-1/2 h-7 w-28 -translate-x-1/2 rotate-[-4deg] bg-citron/70 shadow-sm" />
+              <img
+                src="/about-consultancy.jpg"
+                alt="Guru Gorakhnath Global Manpower Executive Consultation"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+              <p className="scribble absolute bottom-14 left-6 z-20 flex items-center gap-2 text-xl text-charcoal/70">
+                <Building2 size={15} /> document verification desk
+              </p>
             </div>
-            <div>
-              <strong className="stat-number">45+</strong>
-              <span className="stat-label">Trade Categories</span>
-            </div>
-          </div>
 
-          <div className="about-stat-item">
-            <div className="stat-icon-wrap green">
-              <ShieldCheck size={22} />
+            <div className="relative z-10 mx-auto -mt-10 w-[82%] rotate-[-3deg] rounded-sm bg-cream p-3.5 pb-11 shadow-[0_20px_50px_-18px_rgba(32,32,30,0.4)] transition-transform duration-500 hover:rotate-0">
+              <img
+                src="/about-workers.jpg"
+                alt="Candidate Skill Testing and Technical Training"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+              <p className="scribble absolute right-5 bottom-2 flex items-center gap-2 text-xl text-charcoal/70">
+                <Award size={14} /> trade testing day
+              </p>
             </div>
-            <div>
-              <strong className="stat-number">Reg. {contact.registration}</strong>
-              <span className="stat-label">Government Approved</span>
-            </div>
-          </div>
 
-          <div className="about-stat-item">
-            <div className="stat-icon-wrap amber">
-              <MapPin size={22} />
+            {/* floating chips */}
+            <div className="absolute -bottom-5 left-0 z-20 flex rotate-2 items-center gap-2.5 rounded-full bg-charcoal px-5 py-3 text-cream shadow-xl">
+              <ShieldCheck size={15} className="text-citron" />
+              <span className="text-[12px] font-medium lowercase">
+                govt. reg. {contact.registration}
+              </span>
             </div>
-            <div>
-              <strong className="stat-number">Gorakhpur, UP</strong>
-              <span className="stat-label">Headquarters & Desk</span>
+            <div className="absolute -top-4 right-0 z-20 flex rotate-[-2deg] items-center gap-2.5 rounded-full bg-citron px-5 py-3 text-charcoal shadow-xl">
+              <Globe size={15} />
+              <span className="text-[12px] font-medium lowercase">12+ overseas markets</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Heritage, Mission & Photo Collage Section */}
-      <section className="section about-heritage-section">
-        <div className="container">
-          <div className="about-heritage-grid">
-            {/* Left Narrative Column */}
-            <div className="about-heritage-content">
-              <div className="section-kicker">
-                <Sparkles size={14} />
-                <span>Our Heritage & Mission</span>
-              </div>
-              <h2 className="about-section-heading">
-                From local craftsmanship to <span>flourishing global careers.</span>
-              </h2>
-
-              <p className="about-lead-para">
-                <strong>Guru Gorakhnath Global Manpower LLP</strong> was established with a singular, unwavering vision: to provide honest, legally safeguarded, and transparent overseas employment opportunities for skilled and hardworking professionals from Uttar Pradesh and across India.
-              </p>
-
-              <p className="about-body-para">
-                Headquartered at Sonbarsa Bazar, NH 28, Gorakhpur, we serve as an accredited gateway connecting talented masons, electricians, pipe fitters, fabricators, welders, chefs, and facility staff with premier employers in the Gulf (Dubai, Saudi Arabia, Qatar, Kuwait, Oman, Bahrain) and Europe (Romania, Poland, Bulgaria).
-              </p>
-
-              {/* Verification Checklist */}
-              <div className="about-checklist">
-                {verificationPoints.map((pt, idx) => (
-                  <div className="checklist-card" key={idx}>
-                    <div className="checklist-icon">
-                      <CheckCircle2 size={18} />
-                    </div>
-                    <div>
-                      <strong>{pt.title}</strong>
-                      <span>{pt.subtitle}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Executive Quote Callout */}
-              <div className="about-quote-card">
-                <div className="quote-accent-bar" />
-                <p>
-                  "We hold ourselves to the highest standards of integrity. Every job opening we share is verified, every visa processed is legal, and every candidate is guided like family."
-                </p>
-                <div className="quote-author">
-                  <strong>Leadership Team</strong>
-                  <small>Guru Gorakhnath Global Manpower LLP • Gorakhpur</small>
-                </div>
-              </div>
+      {/* featured countries */}
+      <section className="border-y border-line bg-paper-deep py-20 md:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+          <div className="mb-14 max-w-2xl">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-10 bg-citron-deep" />
+              <span className="label-tag text-ink-soft">international deployment</span>
             </div>
-
-            {/* Right Media Photo Collage Column */}
-            <div className="about-media-column">
-              <div className="photo-collage-wrapper">
-                {/* Main Corporate Office Photo */}
-                <div className="photo-card main-photo">
-                  <img
-                    src="/about-consultancy.jpg"
-                    alt="Guru Gorakhnath Global Manpower Executive Consultation"
-                    className="collage-image"
-                    loading="lazy"
-                  />
-                  <div className="photo-overlay-caption">
-                    <Building2 size={15} />
-                    <span>Executive Overseas Consultation & Document Verification</span>
-                  </div>
-                </div>
-
-                {/* Overlapping Trade Testing Photo */}
-                <div className="photo-card sub-photo">
-                  <img
-                    src="/about-workers.jpg"
-                    alt="Candidate Skill Testing and Technical Training"
-                    className="collage-image"
-                    loading="lazy"
-                  />
-                  <div className="photo-overlay-caption">
-                    <Award size={15} />
-                    <span>Trade Testing & Certified Skill Assessment</span>
-                  </div>
-                </div>
-
-                {/* Floating Animated Badge 1 */}
-                <div className="floating-badge badge-gov">
-                  <div className="badge-icon-glow">
-                    <ShieldCheck size={18} />
-                  </div>
-                  <div>
-                    <strong>Govt. Reg. {contact.registration}</strong>
-                    <small>100% Genuine Recruitment</small>
-                  </div>
-                </div>
-
-                {/* Floating Animated Badge 2 */}
-                <div className="floating-badge badge-world">
-                  <div className="badge-icon-glow">
-                    <Globe size={18} />
-                  </div>
-                  <div>
-                    <strong>12+ Overseas Markets</strong>
-                    <small>GCC & European Deployment</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Global Deployment Network Section */}
-      <section className="section about-countries-section">
-        <div className="container">
-          <div className="section-heading centered">
-            <div className="section-kicker">
-              <Globe size={14} />
-              <span>International Deployment</span>
-            </div>
-            <h2>Countries We Recruit & Deploy For</h2>
-            <p className="section-subtitle">
-              We maintain direct connections with trusted overseas companies offering authentic employment visas, company accommodation, and competitive earnings.
+            <h2 className="display-2">countries we recruit & deploy for</h2>
+            <p className="mt-5 text-[14.5px] leading-relaxed text-ink-soft">
+              We maintain direct connections with trusted overseas companies
+              offering authentic employment visas, company accommodation, and
+              competitive earnings.
             </p>
           </div>
 
-          <div className="about-countries-grid">
+          <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-6">
             {featuredCountries.map((c) => (
-              <div className="about-country-card" key={c.name}>
-                <div className="country-img-wrap">
+              <div
+                key={c.name}
+                className="group overflow-hidden rounded-lg border border-line bg-cream transition-all duration-400 hover:-translate-y-1.5 hover:shadow-[0_20px_44px_-18px_rgba(32,32,30,0.35)]"
+              >
+                <div className="relative">
                   <img
                     src={`/countries/${c.code}.jpg`}
                     alt={c.name}
-                    className="country-thumb"
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
-                  <span className="country-region-tag">{c.region}</span>
+                  <span className="absolute top-2.5 left-2.5 rounded-full bg-charcoal/85 px-2.5 py-1 text-[9px] font-bold tracking-[0.14em] text-cream uppercase">
+                    {c.region}
+                  </span>
                 </div>
-                <div className="country-info">
-                  <h4>{c.name}</h4>
-                  <p>{c.tag}</p>
+                <div className="p-3.5">
+                  <h4 className="text-[14px] font-semibold lowercase">{c.name}</h4>
+                  <p className="mt-0.5 text-[11.5px] text-ink-soft lowercase">{c.tag}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="countries-cta-row">
-            <Link to="/countries" className="btn btn-outline-gold">
-              <span>View All 12 Country Guidelines</span>
-              <ArrowRight size={16} />
+          <div className="mt-12 text-center">
+            <Link
+              to="/countries"
+              className="group inline-flex items-center gap-2.5 rounded-full bg-charcoal px-7 py-4 text-sm font-semibold lowercase text-cream transition-colors hover:bg-blue"
+            >
+              view all 12 country guidelines
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Core Highlights Section */}
-      <section className="section dark-section about-highlights-section">
-        <div className="container">
-          <div className="section-heading centered">
-            <div className="section-kicker light">
-              <FileCheck2 size={14} />
-              <span>Our Core Principles</span>
+      {/* highlights */}
+      <section className="bg-navy py-20 text-cream md:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+          <div className="mb-14 max-w-2xl">
+            <div className="mb-6 flex items-center gap-3">
+              <FileCheck2 size={15} className="text-citron" />
+              <span className="label-tag text-cream/50">our core principles</span>
             </div>
-            <h2>Why Candidates & Employers Trust Us</h2>
-            <p style={{ color: "#cbd5e1", maxWidth: "680px", margin: "0 auto" }}>
-              Our transparent approach eliminates middlemen, protects workers' rights, and provides international employers with pre-vetted, qualified candidates.
+            <h2 className="display-2 text-cream">why candidates & employers trust us</h2>
+            <p className="mt-5 max-w-xl text-[14.5px] leading-relaxed text-cream/55">
+              Our transparent approach eliminates middlemen, protects workers'
+              rights, and provides international employers with pre-vetted,
+              qualified candidates.
             </p>
           </div>
 
-          <div className="highlights-grid-modern">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {highlights.map((item, idx) => {
               const Icon = item.icon;
               return (
-                <div className="highlight-card-modern" key={idx}>
-                  <div className="highlight-card-img-wrap">
+                <article
+                  key={idx}
+                  className="group overflow-hidden rounded-lg border border-cream/12 bg-cream/[0.04] transition-all duration-400 hover:-translate-y-1.5 hover:border-citron/40"
+                >
+                  <div className="relative">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="highlight-card-img"
+                      className="aspect-[16/10] w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-[1.04] group-hover:opacity-100"
                       loading="lazy"
                     />
-                    <span className="highlight-card-badge">{item.badge}</span>
-                    <div className="highlight-icon-glow">
-                      <Icon size={20} />
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
+                    <span className="absolute top-3 left-3 rounded-full bg-citron px-3 py-1 text-[10.5px] font-bold text-charcoal lowercase">
+                      {item.badge}
+                    </span>
                   </div>
-                  <div className="highlight-card-body">
-                    <h3>{item.title}</h3>
-                    <p>{item.desc}</p>
+                  <div className="p-6">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-citron/40 text-citron">
+                      <Icon size={16} />
+                    </span>
+                    <h3 className="mt-4 text-[16px] font-semibold lowercase tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2.5 text-[13px] leading-relaxed text-cream/55">{item.desc}</p>
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us component */}
       <WhyChooseUs />
 
-      {/* Gorakhpur Office & Direct Action Section */}
-      <section className="section about-cta-section">
-        <div className="container">
-          <div className="about-cta-card">
-            <div className="cta-content">
-              <div className="section-kicker">
-                <MapPin size={14} />
-                <span>Visit Our Gorakhpur Office</span>
+      {/* CTA */}
+      <section className="bg-paper py-20 md:py-24">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-10">
+          <div className="grid items-center gap-10 rounded-lg border border-line bg-cream p-9 md:p-14 lg:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <div className="mb-6 flex items-center gap-3">
+                <MapPin size={15} className="text-citron-deep" />
+                <span className="label-tag text-ink-soft">visit our gorakhpur office</span>
               </div>
-              <h2>Ready to take your trade overseas?</h2>
-              <p>
-                Visit our office at <strong>Sonbarsa Bazar (Police Chowki ke bagal mein), NH 28, Gorakhpur, UP</strong> for direct consultation, document assessment, and current vacancy registration.
+              <h2 className="display-2">
+                ready to take your trade{" "}
+                <span className="relative inline-block">
+                  overseas?
+                  <span className="absolute inset-x-0 bottom-1 -z-10 h-3 bg-citron/60 md:h-4" />
+                </span>
+              </h2>
+              <p className="mt-5 max-w-lg text-[14.5px] leading-relaxed text-ink-soft">
+                Visit our office at{" "}
+                <strong className="text-charcoal">
+                  Sonbarsa Bazar (Police Chowki ke bagal mein), NH 28, Gorakhpur, UP
+                </strong>{" "}
+                for direct consultation, document assessment, and current
+                vacancy registration.
               </p>
 
-              <div className="cta-meta-badges">
-                <span className="meta-pill">
-                  <ShieldCheck size={14} /> Govt. Reg: {contact.registration}
-                </span>
-                <span className="meta-pill">
-                  <MapPin size={14} /> NH 28, Gorakhpur
-                </span>
-                <span className="meta-pill">
-                  <Briefcase size={14} /> Direct Employer Interviews
-                </span>
+              <div className="mt-7 flex flex-wrap gap-2.5">
+                {[
+                  [ShieldCheck, `govt. reg: ${contact.registration}`],
+                  [MapPin, "nh 28, gorakhpur"],
+                  [Briefcase, "direct employer interviews"],
+                ].map(([Icon, label]) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-2 text-[12px] font-medium text-ink-soft"
+                  >
+                    <Icon size={13} className="text-blue" />
+                    {label}
+                  </span>
+                ))}
               </div>
+            </div>
 
-              <div className="cta-btn-group">
-                <Link to="/jobs" className="btn btn-primary cta-main-btn">
-                  <span>Browse Open Vacancies</span>
-                  <ArrowRight size={17} />
-                </Link>
-
-                <a
-                  href={`https://wa.me/91${contact.primary}?text=Hello%20Guru%20Gorakhnath%20Global%20Manpower,%20I%20want%20to%20know%20more%20about%20your%20services.`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn btn-whatsapp"
-                >
-                  <MessageCircle size={17} />
-                  <span>Chat on WhatsApp</span>
-                </a>
-
-                <Link to="/contact" className="btn btn-secondary">
-                  <span>Contact Information</span>
-                </Link>
-              </div>
+            <div className="flex flex-col gap-3 lg:justify-self-end lg:px-6">
+              <Link
+                to="/jobs"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full bg-charcoal px-7 py-4 text-sm font-semibold lowercase text-cream transition-colors hover:bg-blue"
+              >
+                browse open vacancies
+                <ArrowRight size={15} />
+              </Link>
+              <a
+                href={`https://wa.me/91${contact.primary}?text=Hello%20Guru%20Gorakhnath%20Global%20Manpower,%20I%20want%20to%20know%20more%20about%20your%20services.`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full bg-citron px-7 py-4 text-sm font-semibold lowercase text-charcoal transition-colors hover:bg-cream"
+              >
+                <MessageCircle size={15} />
+                chat on whatsapp
+              </a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2.5 rounded-full border border-charcoal/15 px-7 py-4 text-sm font-semibold lowercase text-charcoal transition-colors hover:bg-charcoal hover:text-cream"
+              >
+                contact information
+              </Link>
             </div>
           </div>
         </div>

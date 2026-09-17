@@ -264,131 +264,119 @@ export default function AIChatbot() {
   return (
     <>
       {/* Floating Right AI Chatbot Button */}
-      <aside
-        className="ai-chatbot-widget"
-        aria-label="AI Recruitment Assistant"
-      >
+      <aside className="fixed right-4 bottom-24 z-40 md:bottom-8" aria-label="AI Recruitment Assistant">
         <button
-          className={`ai-float-btn ${isOpen ? "active" : ""}`}
           onClick={() => setIsOpen(!isOpen)}
           title="Open AI Recruitment Assistant"
           aria-expanded={isOpen}
+          className="group relative flex items-center justify-center rounded-full bg-navy-deep p-4 text-cream shadow-[0_18px_40px_-12px_rgba(9,30,51,0.55)] transition-all duration-300 hover:bg-charcoal active:scale-95"
         >
-          <span className="ai-pulse-ring" />
-          <span className="ai-icon-wrapper">
-            {isOpen ? <X size={22} /> : <Bot size={24} />}
-          </span>
-          <span className="float-micro-badge ai-badge">AI</span>
-          <span className="ai-status-dot" />
-          <span className="ai-float-label">
-            <Sparkles size={13} className="sparkle-spin" /> AI Assistant
-          </span>
+          <span className="absolute inset-0 rounded-full bg-navy-deep animate-pulse-ring" />
+          {isOpen ? <X size={21} className="relative" /> : <Bot size={23} className="relative" />}
+          {!isOpen && (
+            <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-citron text-[8px] font-bold text-charcoal">
+              AI
+            </span>
+          )}
         </button>
+        {!isOpen && (
+          <span className="pointer-events-none absolute top-1/2 right-[calc(100%+14px)] hidden -translate-y-1/2 items-center gap-1.5 rounded-full bg-charcoal px-4 py-2 text-[12px] font-medium whitespace-nowrap text-cream opacity-0 shadow-xl transition-all duration-300 group-hover:opacity-100 md:flex">
+            <Sparkles size={12} className="text-citron" /> AI assistant
+          </span>
+        )}
       </aside>
 
       {/* Interactive AI Chat Window */}
       {isOpen && (
         <div
-          className="ai-chat-window"
+          className="fixed right-4 bottom-24 z-50 flex h-[min(560px,72svh)] w-[min(400px,calc(100vw-2rem))] flex-col overflow-hidden rounded-lg border border-line bg-paper shadow-[0_40px_90px_-20px_rgba(9,30,51,0.5)] md:right-6 md:bottom-24"
           role="dialog"
           aria-modal="true"
           aria-label="AI Assistant Window"
         >
           {/* Header */}
-          <div className="ai-chat-header">
-            <div className="ai-header-left">
-              <div className="ai-avatar">
-                <Bot size={20} color="#0a192f" />
-                <span className="ai-avatar-badge" />
-              </div>
-              <div>
-                <strong className="ai-bot-name">GG Manpower AI</strong>
-                <span className="ai-bot-sub">
-                  <span className="live-indicator" /> Online • 24/7 Candidate
-                  Support
+          <div className="flex items-center justify-between bg-navy-deep px-5 py-4">
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-10 w-10 items-center justify-center rounded-full bg-citron text-charcoal">
+                <Bot size={19} />
+                <span className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-full border-2 border-navy-deep bg-emerald-400" />
+              </span>
+              <div className="leading-tight">
+                <strong className="block text-[14px] font-semibold text-cream lowercase">
+                  gg manpower ai
+                </strong>
+                <span className="flex items-center gap-1.5 text-[11px] text-cream/55">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-blink" />
+                  online • 24/7 candidate support
                 </span>
               </div>
             </div>
-            <div className="ai-header-actions">
+            <div className="flex items-center gap-2">
               <button
-                className="ai-action-btn"
                 title="Reset Chat"
                 onClick={resetChat}
                 aria-label="Reset conversation"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-cream/60 transition-colors hover:bg-cream/10 hover:text-cream"
               >
-                <RotateCcw size={15} />
+                <RotateCcw size={14} />
               </button>
               <button
-                className="ai-action-btn"
                 title="Close Chat"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close conversation"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-cream/60 transition-colors hover:bg-cream/10 hover:text-cream"
               >
-                <X size={17} />
+                <X size={16} />
               </button>
             </div>
           </div>
 
           {/* Messages Body */}
-          <div className="ai-chat-body">
+          <div className="thin-scroll flex-1 space-y-4 overflow-y-auto bg-paper px-4 py-5">
             {messages.map((m) => (
               <div
                 key={m.id}
-                className={`ai-msg-group ${m.sender === "user" ? "user-group" : "bot-group"}`}
+                className={`flex flex-col ${m.sender === "user" ? "items-end" : "items-start"}`}
               >
                 <div
-                  className={`ai-bubble ${m.sender === "user" ? "user-bubble" : "bot-bubble"}`}
+                  className={`max-w-[85%] rounded-lg px-4 py-3 text-[13.5px] leading-relaxed ${
+                    m.sender === "user"
+                      ? "rounded-br-sm bg-blue text-cream"
+                      : "rounded-bl-sm border border-line bg-cream text-charcoal"
+                  }`}
                 >
                   <p style={{ whiteSpace: "pre-line", margin: 0 }}>{m.text}</p>
 
                   {/* Message Action Links */}
                   {m.actions && m.actions.length > 0 && (
-                    <div className="ai-actions-grid">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       {m.actions.map((act, idx) => {
+                        const base =
+                          "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11.5px] font-semibold lowercase transition-colors";
                         if (act.type === "link") {
                           return (
-                            <a
-                              key={idx}
-                              href={act.to}
-                              className="ai-action-pill link-pill"
-                            >
-                              {act.label} <ArrowRight size={13} />
+                            <a key={idx} href={act.to} className={`${base} bg-charcoal text-cream hover:bg-blue`}>
+                              {act.label} <ArrowRight size={12} />
                             </a>
                           );
                         }
                         if (act.type === "call") {
                           return (
-                            <a
-                              key={idx}
-                              href={act.href}
-                              className="ai-action-pill call-pill"
-                            >
-                              <Phone size={13} /> {act.label}
+                            <a key={idx} href={act.href} className={`${base} border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-cream`}>
+                              <Phone size={12} /> {act.label}
                             </a>
                           );
                         }
                         if (act.type === "whatsapp") {
                           return (
-                            <a
-                              key={idx}
-                              href={act.href}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="ai-action-pill wa-pill"
-                            >
-                              <MessageCircle size={13} /> {act.label}
+                            <a key={idx} href={act.href} target="_blank" rel="noreferrer" className={`${base} bg-citron text-charcoal hover:bg-charcoal hover:text-citron`}>
+                              <MessageCircle size={12} /> {act.label}
                             </a>
                           );
                         }
                         return (
-                          <a
-                            key={idx}
-                            href={act.href}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="ai-action-pill ext-pill"
-                          >
-                            <ExternalLink size={13} /> {act.label}
+                          <a key={idx} href={act.href} target="_blank" rel="noreferrer" className={`${base} border border-charcoal/20 text-charcoal hover:bg-charcoal hover:text-cream`}>
+                            <ExternalLink size={12} /> {act.label}
                           </a>
                         );
                       })}
@@ -398,12 +386,12 @@ export default function AIChatbot() {
 
                 {/* Prompt Suggestion Chips */}
                 {m.chips && m.chips.length > 0 && (
-                  <div className="ai-chips-wrap">
+                  <div className="mt-2.5 flex flex-wrap gap-1.5">
                     {m.chips.map((chip, cIdx) => (
                       <button
                         key={cIdx}
-                        className="ai-chip-btn"
                         onClick={() => handleSend(chip)}
+                        className="rounded-full border border-line bg-cream px-3 py-1.5 text-[11.5px] font-medium text-ink-soft transition-colors hover:border-citron-deep hover:bg-citron/25 hover:text-charcoal"
                       >
                         {chip}
                       </button>
@@ -414,11 +402,15 @@ export default function AIChatbot() {
             ))}
 
             {isTyping && (
-              <div className="ai-msg-group bot-group">
-                <div className="ai-bubble bot-bubble typing-bubble">
-                  <span className="dot-flashing" />
-                  <span className="dot-flashing" />
-                  <span className="dot-flashing" />
+              <div className="flex items-start">
+                <div className="flex gap-1.5 rounded-lg rounded-bl-sm border border-line bg-cream px-4 py-3.5">
+                  {[0, 1, 2].map((d) => (
+                    <span
+                      key={d}
+                      className="h-1.5 w-1.5 rounded-full bg-charcoal/40 animate-bounce"
+                      style={{ animationDelay: `${d * 0.15}s` }}
+                    />
+                  ))}
                 </div>
               </div>
             )}
@@ -427,7 +419,7 @@ export default function AIChatbot() {
 
           {/* Chat Footer / Input */}
           <form
-            className="ai-chat-footer"
+            className="flex items-center gap-2.5 border-t border-line bg-cream px-4 py-3.5"
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
@@ -435,18 +427,18 @@ export default function AIChatbot() {
           >
             <input
               type="text"
-              className="ai-input-field"
-              placeholder="Ask anything (e.g. Dubai jobs, documents)..."
+              placeholder="ask anything (e.g. dubai jobs, documents)..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              className="flex-1 rounded-full border border-line bg-paper px-4 py-2.5 text-[13px] text-charcoal placeholder:text-charcoal/35 focus:border-blue focus:outline-none"
             />
             <button
               type="submit"
-              className="ai-send-btn"
               disabled={!input.trim()}
               aria-label="Send message"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy-deep text-cream transition-all hover:bg-blue disabled:opacity-35"
             >
-              <Send size={16} />
+              <Send size={15} />
             </button>
           </form>
         </div>

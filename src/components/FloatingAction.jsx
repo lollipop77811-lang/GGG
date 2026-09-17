@@ -9,41 +9,35 @@ export default function FloatingAction() {
 
   return (
     <>
-      {/* Mobile-Only Call Floating Widget (Positioned on Left side directly above Email) */}
+      {/* mobile-only call widget (left) */}
       <aside
-        className="mobile-floating-widget call-floating-widget"
+        className="fixed bottom-24 left-4 z-40 md:hidden"
         aria-label="Direct Phone Helpline"
       >
         <a
           href={`tel:${contact.primary}`}
-          className="mobile-floating-btn call-floating-btn"
+          className="relative flex h-13 w-13 items-center justify-center rounded-full bg-charcoal p-3.5 text-cream shadow-xl transition-transform active:scale-95"
           title={`Call Helpline +91 ${contact.primary}`}
         >
-          <span className="call-pulse-ring" />
-          <span className="mobile-float-icon">
-            <PhoneCall size={20} />
-          </span>
-          <span className="float-micro-badge call-badge">Call</span>
+          <span className="absolute inset-0 rounded-full bg-charcoal animate-pulse-ring" />
+          <PhoneCall size={19} className="relative" />
         </a>
       </aside>
 
-      {/* Mobile-Only WhatsApp Floating Widget (Positioned on Right side directly above Chatbot) */}
+      {/* mobile-only whatsapp widget (right) */}
       <aside
-        className="mobile-floating-widget whatsapp-floating-widget"
+        className="fixed right-4 bottom-40 z-40 md:hidden"
         aria-label="Official WhatsApp Support"
       >
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noreferrer"
-          className="mobile-floating-btn whatsapp-floating-btn"
+          className="relative flex items-center justify-center rounded-full bg-citron p-3.5 text-charcoal shadow-xl transition-transform active:scale-95"
           title="Chat with Recruitment Desk on WhatsApp"
         >
-          <span className="whatsapp-pulse-ring" />
-          <span className="mobile-float-icon">
-            <MessageCircle size={21} />
-          </span>
-          <span className="float-micro-badge whatsapp-badge">Chat</span>
+          <span className="absolute inset-0 rounded-full bg-citron animate-pulse-ring" />
+          <MessageCircle size={20} className="relative" />
         </a>
       </aside>
     </>

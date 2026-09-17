@@ -17,10 +17,10 @@ import ContactPage from "./pages/ContactPage";
 
 export default function App() {
   return (
-    <div className="site">
+    <div className="flex min-h-screen flex-col bg-paper">
       <ScrollToTop />
       <Header />
-      <main className="main-content">
+      <main className="w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -31,7 +31,9 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
-      <Footer />
+      <footer className="mt-auto w-full">
+        <Footer />
+      </footer>
 
       {/* Global Floating Action Widgets System:
           - Desktop view: 2 floating widgets (Email on bottom-left, AI Chatbot on bottom-right)

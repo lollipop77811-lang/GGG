@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* ============================================================
+   GURU GORAKHNATH × LUNCHLINE EDITORIAL DESIGN SYSTEM
+   Palette: paper white, charcoal ink, deep navy, citron accent,
+   chalkboard green. Type: Space Grotesk (lowercase editorial)
+   + Caveat (chalk scribbles).
+   ============================================================ */
+
+@theme {
+  /* --- palette --- */
+  --color-paper: #faf8f2;        /* warm paper background */
+  --color-paper-deep: #f1eee4;   /* darker paper for alt sections */
+  --color-charcoal: #20201e;     /* primary ink */
+  --color-ink-soft: #55534c;     /* muted body text */
+  --color-line: #e3dfd2;         /* hairline borders on paper */
+  --color-navy: #0e2a47;         /* deep navy sections */
+  --color-navy-deep: #091e33;    /* darker navy */
+  --color-blue: #0056a7;         /* lunchline brand blue */
+  --color-citron: #d9e64f;       /* citrus accent */
+  --color-citron-deep: #a8b32a;  /* darker citron for small text on light */
+  --color-board: #20362b;        /* chalkboard green */
+  --color-board-deep: #172a21;   /* darker board edge */
+  --color-chalk: #f3f1e7;        /* chalk white */
+  --color-cream: #fffdf6;        /* polaroid frame white */
+
+  /* --- typography --- */
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-scribble: "Caveat", "Comic Sans MS", cursive;
+
+  /* --- motion --- */
+  --animate-draw: draw 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-bob: bob 2.4s ease-in-out infinite;
+  --animate-blink: blink 1.6s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+
+  @keyframes draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.55; }
+    80%, 100% { transform: scale(1.9); opacity: 0; }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(9px); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.25; }
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-charcoal font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-citron);
+    color: var(--color-charcoal);
+  }
+
+  /* lowercase editorial headings everywhere by default */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans lowercase;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ============================================================
+   SIGNATURE UTILITIES
+   ============================================================ */
+
+/* thin animated rule that draws itself across the page */
+@utility draw-line {
+  position: relative;
+  height: 1px;
+  background: var(--color-line);
+  overflow: hidden;
+}
+
+/* big lowercase display heading */
+@utility display-1 {
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 5.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+@utility display-2 {
+  font-weight: 500;
+  font-size: clamp(1.9rem, 4.4vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+}
+
+@utility display-3 {
+  font-weight: 500;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* small uppercase label — lunchline "label" class */
+@utility label-tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* chalk scribble text for blackboard */
+@utility scribble {
+  font-family: var(--font-scribble);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* thin scrollbar for panels */
+@utility thin-scroll {
+  scrollbar-width: thin;
+  &::-webkit-scrollbar { width: 5px; height: 5px; }
+  &::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.18); border-radius: 99px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+}
