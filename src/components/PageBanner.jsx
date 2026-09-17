@@ -8,9 +8,24 @@ export default function PageBanner({
   description,
   breadcrumb,
   hideBreadcrumb = false,
+  image,
 }) {
   return (
     <div className="relative overflow-hidden bg-navy-deep">
+      {/* background photo + wash */}
+      {image && (
+        <div className="absolute inset-0">
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/85 via-navy-deep/55 to-navy-deep/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 via-navy-deep/25 to-transparent" />
+        </div>
+      )}
+
       {/* texture + glow */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(217,230,79,0.10),transparent_50%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(0,86,167,0.25),transparent_55%)]" />

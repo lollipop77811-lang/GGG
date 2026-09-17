@@ -12,10 +12,10 @@ export default function Hero() {
           src="/hero-bg.jpg"
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-center opacity-45"
+          className="h-full w-full object-cover object-center opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/80 via-navy-deep/55 to-navy-deep/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/55 via-transparent to-transparent" />
       </div>
 
       {/* content */}

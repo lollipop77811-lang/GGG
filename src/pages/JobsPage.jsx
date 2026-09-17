@@ -119,6 +119,17 @@ export default function JobsPage() {
     <div>
       {/* editorial hero */}
       <section className="relative overflow-hidden bg-navy-deep">
+        {/* background photo + wash */}
+        <div className="absolute inset-0">
+          <img
+            src="/banner-jobs.jpg"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center opacity-40"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/85 via-navy-deep/55 to-navy-deep/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/70 via-navy-deep/25 to-transparent" />
+        </div>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(217,230,79,0.10),transparent_50%)]" />
         <div className="relative mx-auto max-w-[1440px] px-5 pt-36 pb-16 md:px-10 md:pt-44 md:pb-20">
           <div className="mb-7 inline-flex items-center gap-3 rounded-full border border-cream/15 px-4 py-2">

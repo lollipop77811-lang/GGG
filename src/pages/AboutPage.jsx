@@ -90,6 +90,7 @@ export default function AboutPage() {
         kicker="official overseas recruitment center • gorakhpur"
         title="about guru gorakhnath global manpower"
         description="A government-recognized overseas manpower consultancy bridging India's skilled tradesmen and technical workforce with prestigious career opportunities across the Gulf and Europe."
+        image="/banner-about.jpg"
         hideBreadcrumb={true}
       />
 

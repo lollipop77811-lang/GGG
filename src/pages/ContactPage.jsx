@@ -61,6 +61,7 @@ export default function ContactPage() {
         title="contact our gorakhpur center"
         description="Connect directly with registered overseas recruitment specialists for interview schedules, vacancy registration, and document assessment."
         breadcrumb="contact"
+        image="/banner-contact.jpg"
         hideBreadcrumb={true}
       />
 
