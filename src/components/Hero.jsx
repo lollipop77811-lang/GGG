@@ -93,7 +93,7 @@ export default function Hero() {
 
       {/* content */}
       <div
-        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-20 pb-20 md:px-10 md:pt-28 md:pb-28 [text-shadow:0_2px_22px_rgba(9,30,51,0.55)]"
+        className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-20 pb-24 md:px-10 md:pt-28 md:pb-24 lg:pb-10 [text-shadow:0_2px_22px_rgba(9,30,51,0.55)]"
       >
         <div className="max-w-4xl">
           {/* eyebrow */}
@@ -160,56 +160,56 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* bottom bar: circular scroll indicator */}
-        <div className="mt-6 flex items-end justify-end border-t border-cream/15 pt-4 md:mt-10 md:pt-5">
-          {/* circular scroll indicator — lunchline signature */}
-          <button
-            type="button"
-            aria-label="Scroll to next section"
-            onClick={() =>
-              window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-            }
-            className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-cream/25 text-cream transition-all duration-300 hover:border-citron hover:bg-citron hover:text-charcoal md:flex animate-bob"
-          >
-            <ArrowDown size={18} />
-          </button>
-        </div>
       </div>
 
-      {/* slide caption — bottom right corner (right offset clears the floating chat bubble) */}
-      <div className="absolute right-5 bottom-5 z-20 flex flex-col items-end gap-3 md:right-28 md:bottom-8">
-        {/* progress bars (clickable) */}
-        <div className="flex items-center gap-1.5">
-          {slides.map((slide, i) => (
-            <button
-              key={slide.src}
-              type="button"
-              aria-label={`show slide ${i + 1}`}
-              onClick={() => setIndex(i)}
-              className="h-[3px] w-7 overflow-hidden rounded-full bg-cream/25 transition-colors duration-500 hover:bg-cream/50"
-            >
-              {i === index && (
-                <span
-                  key={index}
-                  className="block h-full w-full origin-left bg-citron animate-slide-progress"
-                />
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* small caption related to the visible image */}
-        <p
-          key={index}
-          className="max-w-[300px] text-right text-[12px] leading-relaxed font-light text-cream/80 animate-fade-up"
+      {/* slide caption cluster — bottom right corner (right offset clears the floating chat bubble) */}
+      <div className="absolute right-5 bottom-5 z-20 flex items-center gap-5 md:right-28 md:bottom-8">
+        {/* circular scroll indicator — lunchline signature (desktop only) */}
+        <button
+          type="button"
+          aria-label="Scroll to next section"
+          onClick={() =>
+            window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+          }
+          className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-cream/25 text-cream transition-all duration-300 hover:border-citron hover:bg-citron hover:text-charcoal md:flex animate-bob"
         >
-          <span className="font-semibold text-citron">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <span className="text-cream/40"> / {String(slides.length).padStart(2, "0")}</span>
-          <span className="mx-2 text-cream/30">—</span>
-          {slides[index].caption}
-        </p>
+          <ArrowDown size={18} />
+        </button>
+
+        <div className="flex flex-col items-end gap-3">
+          {/* progress bars (clickable) */}
+          <div className="flex items-center gap-1.5">
+            {slides.map((slide, i) => (
+              <button
+                key={slide.src}
+                type="button"
+                aria-label={`show slide ${i + 1}`}
+                onClick={() => setIndex(i)}
+                className="h-[3px] w-7 overflow-hidden rounded-full bg-cream/25 transition-colors duration-500 hover:bg-cream/50"
+              >
+                {i === index && (
+                  <span
+                    key={index}
+                    className="block h-full w-full origin-left bg-citron animate-slide-progress"
+                  />
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* small caption related to the visible image */}
+          <p
+            key={index}
+            className="max-w-[300px] text-right text-[12px] leading-relaxed font-light text-cream/80 animate-fade-up"
+          >
+            <span className="font-semibold text-citron">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="text-cream/40"> / {String(slides.length).padStart(2, "0")}</span>
+            <span className="mx-2 text-cream/30">—</span>
+            {slides[index].caption}
+          </p>
+        </div>
       </div>
     </section>
   );

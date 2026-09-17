@@ -1,8 +1,10 @@
 import React from "react";
 import { Mail } from "lucide-react";
 import { contact } from "../data/siteData";
+import useHideOverHero from "../hooks/useHideOverHero";
 
 export default function EmailFloat() {
+  const hideOverHero = useHideOverHero();
   const mailAddress = contact.email || "gurugorakhnathglobalmanpower@gmail.com";
   const mailSubject = encodeURIComponent(
     "Enquiry Regarding Overseas Jobs - Guru Gorakhnath Global Manpower",
@@ -13,7 +15,9 @@ export default function EmailFloat() {
 
   return (
     <aside
-      className="group fixed bottom-24 left-4 z-40 hidden md:block"
+      className={`group fixed bottom-24 left-4 z-40 hidden transition-all duration-300 md:block ${
+        hideOverHero ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
+      }`}
       aria-label="Quick Email Enquiry"
     >
       <a

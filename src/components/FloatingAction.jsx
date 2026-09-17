@@ -1,8 +1,10 @@
 import React from "react";
 import { PhoneCall, MessageCircle } from "lucide-react";
 import { contact } from "../data/siteData";
+import useHideOverHero from "../hooks/useHideOverHero";
 
 export default function FloatingAction() {
+  const hideOverHero = useHideOverHero();
   const whatsappUrl = `https://wa.me/91${contact.primary}?text=${encodeURIComponent(
     "Hello Guru Gorakhnath Global Manpower, I want to inquire about overseas jobs."
   )}`;
@@ -11,7 +13,9 @@ export default function FloatingAction() {
     <>
       {/* mobile-only call widget (left) */}
       <aside
-        className="fixed bottom-24 left-4 z-40 md:hidden"
+        className={`fixed bottom-24 left-4 z-40 transition-all duration-300 md:hidden ${
+          hideOverHero ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
+        }`}
         aria-label="Direct Phone Helpline"
       >
         <a
@@ -26,7 +30,9 @@ export default function FloatingAction() {
 
       {/* mobile-only whatsapp widget (right) */}
       <aside
-        className="fixed right-4 bottom-40 z-40 md:hidden"
+        className={`fixed right-4 bottom-40 z-40 transition-all duration-300 md:hidden ${
+          hideOverHero ? "pointer-events-none translate-y-3 opacity-0" : "opacity-100"
+        }`}
         aria-label="Official WhatsApp Support"
       >
         <a
