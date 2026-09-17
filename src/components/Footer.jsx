@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   PhoneCall,
   Mail,
@@ -20,23 +20,27 @@ const quickLinks = [
 ];
 
 export default function Footer() {
+  const { pathname } = useLocation();
+
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   return (
     <footer className="bg-charcoal text-cream">
-      {/* giant editorial sign-off */}
-      <div className="border-b border-cream/10">
-        <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-10 md:py-20">
-          <p className="label-tag text-cream/40">guru gorakhnath global manpower llp</p>
-          <h2 className="display-2 mt-4 max-w-4xl text-cream">
-            honest recruitment,
-            <br />
-            <span className="text-citron">lasting careers.</span>
-          </h2>
+      {/* giant editorial sign-off — hidden on the countries page per request */}
+      {pathname !== "/countries" && (
+        <div className="border-b border-cream/10">
+          <div className="mx-auto max-w-[1440px] px-5 py-14 md:px-10 md:py-20">
+            <p className="label-tag text-cream/40">guru gorakhnath global manpower llp</p>
+            <h2 className="display-2 mt-4 max-w-4xl text-cream">
+              honest recruitment,
+              <br />
+              <span className="text-citron">lasting careers.</span>
+            </h2>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* link columns */}
       <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-14 md:px-10 lg:grid-cols-[1.2fr_0.9fr_1.1fr]">
