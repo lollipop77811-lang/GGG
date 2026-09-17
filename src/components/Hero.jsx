@@ -1,25 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowDown, ShieldCheck, Globe2 } from "lucide-react";
 import { countries, contact } from "../data/siteData";
 
+/* hero slide story — in the order provided (1 → 5) */
+const slides = [
+  {
+    src: "/hero-slide-1.jpg",
+    caption: "a dream takes shape — a candidate discovers his opportunity",
+  },
+  {
+    src: "/hero-slide-2.jpg",
+    caption: "honest guidance — genuine work visas, documented end-to-end",
+  },
+  {
+    src: "/hero-slide-3.jpg",
+    caption: "skilled hands — mep technicians & welders ready for site",
+  },
+  {
+    src: "/hero-slide-4.jpg",
+    caption: "departure day — flying out to dubai, kuwait & beyond",
+  },
+  {
+    src: "/hero-slide-5.jpg",
+    caption: "placed & proud — our people building the dubai skyline",
+  },
+];
+
+const SLIDE_INTERVAL = 6000; /* ms — keep in sync with --animate-slide-progress */
+
 export default function Hero() {
+  const [index, setIndex] = useState(0);
+
+  /* auto slide — restarts whenever the index changes (incl. manual clicks) */
+  useEffect(() => {
+    const t = setTimeout(
+      () => setIndex((i) => (i + 1) % slides.length),
+      SLIDE_INTERVAL
+    );
+    return () => clearTimeout(t);
+  }, [index]);
+
   return (
     <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy-deep" id="home">
-      {/* background photo + wash */}
+      {/* auto-sliding background carousel */}
       <div className="absolute inset-0">
-        <img
-          src="/hero-bg.jpg"
-          alt=""
-          aria-hidden="true"
-          className="h-full w-full object-cover object-center opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/55 via-transparent to-transparent" />
+        {slides.map((slide, i) => (
+          <div
+            key={slide.src}
+            aria-hidden={i !== index}
+            className={`absolute inset-0 transition-opacity duration-[1400ms] ease-out ${
+              i === index ? "z-[1] opacity-100" : "z-0 opacity-0"
+            }`}
+          >
+            <img
+              src={slide.src}
+              alt=""
+              className={`h-full w-full object-cover object-center opacity-60 transition-transform duration-[7000ms] ease-out ${
+                i === index ? "scale-105" : "scale-100"
+              }`}
+            />
+          </div>
+        ))}
+        {/* readability washes */}
+        <div className="absolute inset-0 z-[2] bg-gradient-to-b from-navy-deep/70 via-navy-deep/40 to-navy-deep/85" />
+        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-navy-deep/55 via-transparent to-transparent" />
       </div>
 
       {/* content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-36 pb-24 md:px-10 md:pb-28">
+      <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pt-28 pb-24 md:px-10 md:pt-36 md:pb-28">
         <div className="max-w-4xl">
           {/* eyebrow */}
           <div className="mb-7 inline-flex items-center gap-3 animate-fade-up">
@@ -86,7 +135,7 @@ export default function Hero() {
         </div>
 
         {/* bottom bar: destinations ticker + scroll button */}
-        <div className="mt-16 flex items-end justify-between gap-6 border-t border-cream/15 pt-7">
+        <div className="mt-10 flex items-end justify-between gap-6 border-t border-cream/15 pt-7 md:mt-16">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <span className="label-tag text-cream/40">recruitment destinations</span>
             <div className="flex flex-wrap gap-x-5 gap-y-1">
@@ -120,6 +169,42 @@ export default function Hero() {
             <ArrowDown size={18} />
           </button>
         </div>
+      </div>
+
+      {/* slide caption — bottom right corner (right offset clears the floating chat bubble) */}
+      <div className="absolute right-5 bottom-6 z-20 flex flex-col items-end gap-3 md:right-28 md:bottom-8">
+        {/* progress bars (clickable) */}
+        <div className="flex items-center gap-1.5">
+          {slides.map((slide, i) => (
+            <button
+              key={slide.src}
+              type="button"
+              aria-label={`show slide ${i + 1}`}
+              onClick={() => setIndex(i)}
+              className="h-[3px] w-7 overflow-hidden rounded-full bg-cream/25 transition-colors duration-500 hover:bg-cream/50"
+            >
+              {i === index && (
+                <span
+                  key={index}
+                  className="block h-full w-full origin-left bg-citron animate-slide-progress"
+                />
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* small caption related to the visible image */}
+        <p
+          key={index}
+          className="max-w-[300px] text-right text-[12px] leading-relaxed font-light text-cream/80 animate-fade-up"
+        >
+          <span className="font-semibold text-citron">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="text-cream/40"> / {String(slides.length).padStart(2, "0")}</span>
+          <span className="mx-2 text-cream/30">—</span>
+          {slides[index].caption}
+        </p>
       </div>
     </section>
   );
