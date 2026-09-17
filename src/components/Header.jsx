@@ -92,7 +92,7 @@ export default function Header() {
               to={to}
               end={end}
               className={({ isActive }) =>
-                `group relative py-2 text-[13px] font-medium tracking-wide lowercase transition-colors ${
+                `group relative py-2 text-[13px] font-bold tracking-wide uppercase transition-colors ${
                   dark
                     ? "text-cream/75 hover:text-cream"
                     : "text-ink-soft hover:text-charcoal"
@@ -189,7 +189,7 @@ export default function Header() {
                 to={to}
                 end={end}
                 className={({ isActive }) =>
-                  `group flex items-center justify-between border-b border-line py-4 text-2xl font-medium lowercase transition-colors ${
+                  `group flex items-center justify-between border-b border-line py-4 text-2xl font-bold uppercase transition-colors ${
                     isActive ? "text-charcoal" : "text-ink-soft hover:text-charcoal"
                   }`
                 }
